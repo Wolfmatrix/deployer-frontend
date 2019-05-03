@@ -1,8 +1,9 @@
 import $ from 'jquery';
 import 'jquery-sortable';
 
-export default (element, endpoint) => {
-  $(`#${element}_list table`).sortable({
+export default (element, endpoint, suffix) => {
+  const selector = suffix !== undefined ? `${element}s-${suffix}_list` : `${element}_list`;
+  $(`#${selector} table`).sortable({
     containerSelector: 'table',
     itemPath: '> tbody',
     itemSelector: 'tr',

@@ -84,7 +84,8 @@ const getInput = () => {
 
 bindDialogs(element, translationKey, getInput, CommandsCollection);
 
-reorderModels(element, routes.commandsReorder);
+reorderModels(element, routes.commandsReorder, 'before');
+reorderModels(element, routes.commandsReorder, 'after');
 
 export default class CommandsCollectionView extends Backbone.View {
   constructor(step, options) {
@@ -96,8 +97,8 @@ export default class CommandsCollectionView extends Backbone.View {
     this.collection = CommandsCollection;
     this.step = parseInt(step, 10);
 
-    this.$beforeList = $(`#${element}s-before .${element}-list tbody`);
-    this.$afterList = $(`#${element}s-after .${element}-list tbody`);
+    this.$beforeList = $(`#${element}s-before_list .${element}-list tbody`);
+    this.$afterList = $(`#${element}s-after_list .${element}-list tbody`);
 
     this.listeners();
     this.render();
@@ -144,21 +145,21 @@ export default class CommandsCollectionView extends Backbone.View {
     const before = this.collection.find(model => model.isBefore());
 
     if (typeof before !== 'undefined') {
-      $(`#${element}s-before .no-${element}s`).hide();
-      $(`#${element}s-before .${element}-list`).show();
+      $(`#${element}s-before_list .no-${element}s`).hide();
+      $(`#${element}s-before_list .${element}-list`).show();
     } else {
-      $(`#${element}s-before .no-${element}s`).show();
-      $(`#${element}s-before .${element}-list`).hide();
+      $(`#${element}s-before_list .no-${element}s`).show();
+      $(`#${element}s-before_list .${element}-list`).hide();
     }
 
     const after = this.collection.find(model => model.isAfter());
 
     if (typeof after !== 'undefined') {
-      $(`#${element}s-after .no-${element}s`).hide();
-      $(`#${element}s-after .${element}-list`).show();
+      $(`#${element}s-after_list .no-${element}s`).hide();
+      $(`#${element}s-after_list .${element}-list`).show();
     } else {
-      $(`#${element}s-after .no-${element}s`).show();
-      $(`#${element}s-after .${element}-list`).hide();
+      $(`#${element}s-after_list .no-${element}s`).show();
+      $(`#${element}s-after_list .${element}-list`).hide();
     }
   }
 
